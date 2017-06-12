@@ -12,6 +12,12 @@
         "description": "The name of the function app that you wish to create."
       }
     },
+    "documentDBConnectionString": {
+      "type": "string",
+      "metadata": {
+        "description": "Connection String to the Cosmos/Document DB."
+      }
+    },
     "storageAccountType": {
       "type": "string",
       "defaultValue": "Standard_LRS",
@@ -29,7 +35,8 @@
   "variables": {
     "functionAppName": "[parameters('appName')]",
     "hostingPlanName": "[parameters('appName')]",
-    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'azfunctions')]",
+    "storageName": "[concat('function', uniqueString(parameters('appName')))]",
+    "contentShareName": "[toLower(parameters('appName'))]",
     "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]"
   },
   "resources": [
